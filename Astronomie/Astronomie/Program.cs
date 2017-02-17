@@ -81,7 +81,7 @@ namespace Astronomie
             const double latitude = 52.0121;
             const double longitude = 8.3158;
             
-            DateOfAYear data = new DateOfAYear(2016, latitude, longitude);
+            DateOfAYear data = new DateOfAYear(2017, latitude, longitude);
             data.Generate();
             var jsonArray = data.ToJson();
             try
