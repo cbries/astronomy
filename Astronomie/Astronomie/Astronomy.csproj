@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graph.cs" />
     <Compile Include="Moon.cs" />
     <Compile Include="MoonPhases.cs" />
     <Compile Include="Program.cs" />

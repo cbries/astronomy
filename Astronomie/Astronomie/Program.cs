@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -9,6 +9,9 @@ namespace Astronomie
 {
     class Program
     {
+        private static int StartYear = 2018;
+        private static int EndYear = 2050;
+
         internal class AstronomyEntry
         {
             public Sun Sun { get; set; }
@@ -80,18 +83,24 @@ namespace Astronomie
             // Bielefeld
             const double latitude = 52.0121;
             const double longitude = 8.3158;
+
+            for (int year = StartYear; year <= EndYear; ++year)
+            {
+                DateOfAYear data = new DateOfAYear(year, latitude, longitude);
+                data.Generate();
+                var jsonArray = data.ToJson();
+                try
+                {
+                    string targetName = string.Format("..\\..\\Data\\DateOfAYear-{0}.json", year);
+                    File.WriteAllText(targetName, jsonArray.ToString(Formatting.Indented), Encoding.UTF8);
+                }
+                catch
+                {
+                    // ignore
+                }
+            }
+
             
-            DateOfAYear data = new DateOfAYear(2017, latitude, longitude);
-            data.Generate();
-            var jsonArray = data.ToJson();
-            try
-            {
-                File.WriteAllText("DateOfAYear.json", jsonArray.ToString(Formatting.Indented));
-            }
-            catch
-            {
-                // ignore
-            }
             Console.WriteLine("Press any key...");
             Console.ReadLine();
         }
